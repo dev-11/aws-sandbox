@@ -17,7 +17,7 @@ after_success:
 deploy:
   provider: lambda
   function_name: "lambda_handler"
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  role: $AWS_LAMBDA_DEPLOYMENT_ROLE
   region: $AWS_REGION
-  handler_name: "handler"
+  runtime: "python3.7"
+  handler_name: "app"
