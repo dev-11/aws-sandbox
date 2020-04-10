@@ -21,5 +21,5 @@ deploy:
   region: $AWS_REGION
   runtime: "python3.8"
   handler_name: "lambda_handler"
-  module_name: "lambda/app"
+  module_name: "entry_point/app"
 
