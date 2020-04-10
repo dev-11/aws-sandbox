@@ -22,4 +22,4 @@ deploy:
   runtime: "python3.8"
   handler_name: "lambda_handler"
   module_name: "entry_point/app"
-
+  timeout: 60
