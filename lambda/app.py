@@ -3,8 +3,11 @@ from datetime import datetime as dt
 
 
 def lambda_handler(event, context):
-    # TODO implement
+    response = {'event': event,
+                'context': context,
+                'payload': dt.now()}
+
     return {
         'statusCode': 200,
-        'body': json.dumps(f'Hello from Lambda @ {dt.now()} !')
+        'body': json.dumps(response)
     }
