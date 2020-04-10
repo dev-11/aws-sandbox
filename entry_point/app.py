@@ -1,6 +1,6 @@
 import json
 from datetime import datetime as dt
-from package import bs4
+import bs4
 import requests
 
 
