@@ -1,6 +1,6 @@
 import json
 from datetime import datetime as dt
-from bs4 import BeautifulSoup
+from package import bs4
 import requests
 
 
@@ -23,7 +23,7 @@ def get_section():
     site = 'https://www.waterstones.com/campaign/books-of-the-month'
     page = requests.get(site)
 
-    soup = BeautifulSoup(page.text, 'html.parser')
+    soup = bs4.BeautifulSoup(page.text, 'html.parser')
 
     lst = soup.find(class_='row home-row')
     lst2 = lst.find_all(class_='span12')
