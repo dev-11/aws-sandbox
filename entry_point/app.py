@@ -22,6 +22,6 @@ def get_books_of_month():
     books_of_the_month = bom_service.get_books_of_the_month()
 
     return {
-        'service': 'book_of_the_month',
+        'service': 'books_of_the_month',
         'data': books_of_the_month
     }

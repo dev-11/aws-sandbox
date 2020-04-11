@@ -34,8 +34,4 @@ class BooksOfTheMonthService:
         bom = lst2[1:]
         grouped = list(zip(*[iter(bom)] * 2))
 
-        sections = []
-        for pair in grouped:
-            sections.append(self.get_book_details(pair))
-
-        return sections
+        return [self.get_book_details(pair) for pair in grouped]
