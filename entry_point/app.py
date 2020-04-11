@@ -1,6 +1,7 @@
 from datetime import datetime as dt
 import bs4
 import requests
+import json
 
 
 def lambda_handler(event, context):
@@ -9,7 +10,7 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'body': {
-            'fetched_at': dt.now(),
+            'fetched_at': json.dump(dt.now()),
             'data': data
         }
     }
