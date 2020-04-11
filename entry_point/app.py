@@ -14,9 +14,20 @@ def lambda_handler(event, context):
 
 
 def get_book_details(divs):
-    section = divs[0].find('h2').find('em').text
-    title = divs[1].find(class_='title').find('a').text
-    return section, title
+    section = divs[0].find('h2').find('em').text.strip()
+    title = divs[1].find(class_='title').find('a').text.strip()
+    authors = divs[1].find(class_='authors').find('a').text.strip()
+    price = divs[1].find('b', itemprop='price').text.strip()
+    frmat = divs[1].find(class_='format').text.strip()
+    desc = divs[1].find(class_='description').text.strip()
+    return {
+        'section': section.encode("utf-8"),
+        'title': title.encode("utf-8"),
+        'authors': authors.encode("utf-8"),
+        'price': price.encode("utf-8"),
+        'format': frmat.encode("utf-8"),
+        'desc': desc.encode("utf-8")
+    }
 
 
 def get_section():
