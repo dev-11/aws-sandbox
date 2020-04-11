@@ -21,12 +21,12 @@ def get_book_details(divs):
     frmat = divs[1].find(class_='format').text.strip()
     desc = divs[1].find(class_='description').text.strip()
     return {
-        'section': section.encode("utf-8"),
-        'title': title.encode("utf-8"),
-        'authors': authors.encode("utf-8"),
-        'price': price.encode("utf-8"),
-        'format': frmat.encode("utf-8"),
-        'desc': desc.encode("utf-8")
+        'section': section,
+        'title': title, 
+        'authors': authors,
+        'price': price,
+        'format': frmat,
+        'desc': desc
     }
 
 
