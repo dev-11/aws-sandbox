@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'body': {
-            'fetched_at': json.dumps(dt.now()),
+            'fetched_at': json.dumps(f'{dt.now()}'),
             'data': data
         }
     }
