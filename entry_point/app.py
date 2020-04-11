@@ -1,52 +1,27 @@
 from datetime import datetime as dt
-import bs4
-import requests
+from services import BooksOfTheMonthService
 import json
+import config
 
 
 def lambda_handler(event, context):
-    data = get_section()
+
+    data = get_books_of_month()
 
     return {
         'statusCode': 200,
         'body': {
             'fetched_at': json.dumps(f'{dt.now()}'),
-            'data': data
+            'data': [data]
         }
     }
 
 
-def get_book_details(divs):
-    section = divs[0].find('h2').find('em').text.strip()
-    title = divs[1].find(class_='title').find('a').text.strip()
-    authors = divs[1].find(class_='authors').find('a').text.strip()
-    price = divs[1].find('b', itemprop='price').text.strip()
-    frmat = divs[1].find(class_='format').text.strip()
-    desc = divs[1].find(class_='description').text.strip()
+def get_books_of_month():
+    bom_service = BooksOfTheMonthService(config.books_of_the_month_url)
+    books_of_the_month = bom_service.get_books_of_the_month()
+
     return {
-        'section': section,
-        'title': title, 
-        'authors': authors,
-        'price': price,
-        'format': frmat,
-        'desc': desc
+        'service': 'book_of_the_month',
+        'data': books_of_the_month
     }
-
-
-def get_section():
-    site = 'https://www.waterstones.com/campaign/books-of-the-month'
-    page = requests.get(site)
-
-    soup = bs4.BeautifulSoup(page.text, 'html.parser')
-
-    lst = soup.find(class_='row home-row')
-    lst2 = lst.find_all(class_='span12')
-
-    bom = lst2[1:]
-    grouped = list(zip(*[iter(bom)] * 2))
-
-    sections = []
-    for pair in grouped:
-        sections.append(get_book_details(pair))
-
-    return sections
