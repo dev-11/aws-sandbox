@@ -9,7 +9,7 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps(f'Hello from Lambda @ {dt.now()}, {data}!')
+        'body': json.dumps(data)
     }
 
 
@@ -29,6 +29,10 @@ def get_section():
     lst2 = lst.find_all(class_='span12')
 
     bom = lst2[1:]
-    v = bom[0:2]
+    grouped = list(zip(*[iter(bom)] * 2))
 
-    return get_book_details(v)
+    data = []
+    for pair in grouped:
+        data.append(get_book_details(pair))
+
+    return data
