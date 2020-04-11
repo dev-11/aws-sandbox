@@ -1,4 +1,3 @@
-import json
 from datetime import datetime as dt
 import bs4
 import requests
@@ -9,7 +8,10 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': data
+        'body': {
+            'fetched_at': dt.now(),
+            'data': data
+        }
     }
 
 
@@ -42,8 +44,8 @@ def get_section():
     bom = lst2[1:]
     grouped = list(zip(*[iter(bom)] * 2))
 
-    data = []
+    sections = []
     for pair in grouped:
-        data.append(get_book_details(pair))
+        sections.append(get_book_details(pair))
 
-    return data
+    return sections
